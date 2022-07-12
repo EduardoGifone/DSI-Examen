@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="formulario.css">
+    <title>FORMULARIO</title>
+</head>
+<body>
+    <div class="container">
+        <form action="" class="form">
+            
+            <label for="mostrar_no_tutorados" class="form__label">
+                <input id="mostrar_no_tutorados" type="radio" name="mostrar" value="no_tutorados" class="form__radio">
+                Mostrar alumnos que no seran tutorados en 2022-1</label>
+            
+            <label for="mostrar_nuevos_alumnos" class="form__label">
+                <input id="mostrar_nuevos_alumnos" type="radio" name="mostrar" value="nuevos_alumnos" class="form__radio">
+                Mostra nuevos alumnos para tutoria</label>
+
+            <input type="submit" class="form__submit" value="Buscar">
+        </form>
+
+        <div class="tabla_datos">
+
+            <div class="tabla_datos__row tabla_datos__row--head">
+                <p class="tabla_datos__row__p">Codigo</p>
+                <p class="tabla_datos__row__p">Nombre</p>
+            </div>
+
+            <div class="tabla_datos__row tabla_datos__row--body">
+                <p class="tabla_datos__row__p">193001</p>
+                <p class="tabla_datos__row__p">Eduardo Juareis Gifone Villasante</p>
+            </div>
+            
+        </div>
+    </div>    
+</body>
+</html>
