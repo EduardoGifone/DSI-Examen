@@ -2,23 +2,57 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
+    background-color: #F09A3B;
+    backdrop-filter: blur(5px);
+    color: #fff;
     height: 100vh;
-    background-color: #012B5A;
+}
+
+.nav {
+    min-height: 15vh;
+    background-color: #0F1432;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav__img--unsaac {
+    background: url(unsaac.png);
+}
+
+.nav__img--info {
+    background: url(info.png);
+}
+
+.nav__img {
+    height: 110px;
+    width: 110px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.nav__text {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px);
-    color: #fff;
 }
 
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+}
 
 .container {
-    background: linear-gradient(-45deg, #EC33A1, #EC33A1, #013F81);
+    background-color: #0F1432;
     border-radius: 20px;
     color: #fff;
     box-shadow: 15px 15px 25px rgba(0,0,0,0.5);
@@ -26,41 +60,47 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 60px;
-    gap: 20px;
-    padding: 50px 200px;
 }
 
-.h1 {
-    font-size: 60px;
-    text-shadow: 15px 15px 25px rgba(0,0,0,0.5);
-    margin: 50px;
+.container__h1 {
+    margin: 30px;
+    font-size: 40px;
 }
 
 .form {
+    max-width: 1000px ;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    position: relative;
+}
+
+.form__container {
+    margin: 30px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.form__label {
-    font-size: 18px;
+.form__container__label {
+    font-size: 20px;
     font-weight: 600;
+    text-align: center;
 }
 
 .form__submit {
-    display: block;
-    height: 30px;
-    width: 160px;
     border-style: none;
     border-radius: 4px;
-    font-size: 15px;
+    font-size: 20px;
     transition: 500ms;
-    background-color:#012B5A;
+    background-color:#0F1432;
     color: #fff;
     box-shadow: 10px 10px 25px rgba(0,0,0,0.6);
+    padding: 10px 30px;
+    position:absolute;
+    top: 280px;
 }
 
 .form__submit:hover {
