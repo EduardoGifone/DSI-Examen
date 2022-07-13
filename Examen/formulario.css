@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #F09A3B;
+    backdrop-filter: blur(5px);
+    color: #fff;
+}
+
+.nav {
+    min-height: 15vh;
+    background-color: #0F1432;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav__img--unsaac {
+    background: url(unsaac.png);
+}
+
+.nav__img--info {
+    background: url(info.png);
+}
+
+.nav__img {
+    height: 110px;
+    width: 110px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.nav__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.tabla_datos {
+    background-color: #0F1432;
+    border-radius: 8px;
+    box-shadow: 15px 15px 25px rgba(0,0,0,0.4);
+    padding: 30px;
+}
+
+.tabla_datos__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-weight: 700;
+}
+
+.tabla_datos__row__p {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.tabla_datos__row--head .tabla_datos__row__p {
+    background-color: #fff;
+    color: #000;
+}
+
+.tabla_datos__row--body .tabla_datos__row__p {
+    background-color: #292F4F;
+    color: #fff;
+}
+
+.tabla_datos__row--body .tabla_datos__row__p:nth-child(4n){
+    background-color: #fff;
+    color: #000;
+}
+
+.tabla_datos__row--body .tabla_datos__row__p:nth-child(4n-1){
+    background-color: #fff;
+    color: #000;
+}
