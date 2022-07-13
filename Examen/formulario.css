@@ -16,7 +16,7 @@ body {
 }
 
 .form {
-    background: linear-gradient(-45deg, #EC33A1, #EC33A1, #013F81);
+    background: linear-gradient(-45deg, #ED9B40, #ED9B40, #013F81);
     display: flex;
     flex-direction: column;
     border-radius: 0 0 8px 8px;
@@ -49,7 +49,7 @@ body {
 }
 
 .tabla_datos {
-    background: linear-gradient(-45deg, #EC33A1, #EC33A1, #013F81);
+    background: linear-gradient(-45deg, #ED9B40, #ED9B40, #013F81);
     border-radius: 8px 8px 0 0;
     min-height: 800px;
     box-shadow: 15px 15px 25px rgba(0,0,0,0.4);
