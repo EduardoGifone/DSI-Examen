@@ -48,6 +48,15 @@ body {
     margin: 50px auto;
 }
 
+.titulo {
+    background-color: #0F1432;
+    border-radius: 8px;
+    box-shadow: 15px 15px 25px rgba(0,0,0,0.4);
+    padding: 20px;
+    margin: 50px auto;
+    text-align: center;
+}
+
 .tabla_datos {
     background-color: #0F1432;
     border-radius: 8px;
@@ -58,7 +67,7 @@ body {
 .tabla_datos__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .tabla_datos__row__p {
@@ -70,6 +79,7 @@ body {
 .tabla_datos__row--head .tabla_datos__row__p {
     background-color: #fff;
     color: #000;
+    font-weight: 900;
 }
 
 .tabla_datos__row--body .tabla_datos__row__p {

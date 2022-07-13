@@ -63,11 +63,27 @@
     </nav>
     <div class="container">
 
+        <div class="titulo">
+            <h1 class="titulo__h1">
+            <?php
+
+                if ($_REQUEST['mostrar'] == 'no_tutorados') 
+                {
+                    echo 'Alumnos que no seran tutorados en 2022-1';
+                }
+                else 
+                {
+                    echo 'Nuevos alumnos para tutoria';
+                }                    
+            ?>
+            </h1>
+        </div>
+
         <div class="tabla_datos">
 
             <div class="tabla_datos__row tabla_datos__row--head">
-                <p class="tabla_datos__row__p">Codigo</p>
-                <p class="tabla_datos__row__p">Nombre</p>
+                <p class="tabla_datos__row__p">CODIGO</p>
+                <p class="tabla_datos__row__p">NOMBRE</p>
             </div>
 
             <div class="tabla_datos__row tabla_datos__row--body">
