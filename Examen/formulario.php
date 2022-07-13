@@ -14,9 +14,6 @@
         return [$array_code,$array_name]; 
     }
 
-    list($ar1_codigos,$ar1_nombres) = arreglo('archivo1');
-    list($ar2_codigos,$ar2_nombres) = arreglo('archivo2');
-
     function diferencia_Listas_de_B_peroNoEn_A($Acodes, $Bcodes, $Bnames){
         $ListaDifCodes = [];
         $ListaDifNames = [];
@@ -29,10 +26,21 @@
         return [$ListaDifCodes,$ListaDifNames]; 
     }
 
+    function mostrar($cod, $name) {
+        for ($i = 0; $i < count($cod); $i++)
+            {
+                echo '<p class="tabla_datos__row__p">'.$cod[$i].'</p>';
+                echo '<p class="tabla_datos__row__p">'.$name[$i].'</p>';
+            }
+    }
+
+    // Obtener lista de datos
+    list($ar1_codigos,$ar1_nombres) = arreglo('archivo1');
+    list($ar2_codigos,$ar2_nombres) = arreglo('archivo2');
+
     //Obtener listas de alumos necesarias
-    list($codigos_Tutorados_2022I,$nombres_Tutorados_2022I) = diferencia_Listas_de_B_peroNoEn_A($ar1_codigos, $ar2_codigos, $ar2_nombres);
-    list($codigos_nuevos,$nombres_nuevos) = diferencia_Listas_de_B_peroNoEn_A($ar2_codigos, $ar1_codigos, $ar1_nombres);
-    
+    list($codigos_Tutorados_2022I,$nombres_Tutorados_2022I) = diferencia_Listas_de_B_peroNoEn_A($ar2_codigos, $ar1_codigos, $ar1_nombres);
+    list($codigos_nuevos,$nombres_nuevos) = diferencia_Listas_de_B_peroNoEn_A($ar1_codigos, $ar2_codigos, $ar2_nombres);    
 ?>
 
 <!DOCTYPE html>
@@ -64,10 +72,17 @@
 
             <div class="tabla_datos__row tabla_datos__row--body">
                 <?php
-                    
+
+                    if ($_REQUEST['mostrar'] == 'no_tutorados') 
+                    {
+                        mostrar($codigos_Tutorados_2022I,$nombres_Tutorados_2022I);
+                    }
+                    else 
+                    {
+                        mostrar($codigos_nuevos,$nombres_nuevos);
+                    }                    
                 ?>
-                <p class="tabla_datos__row__p">193001</p>
-                <p class="tabla_datos__row__p">Eduardo Juareis Gifone Villasante</p>
+                
             </div>
             
         </div>
