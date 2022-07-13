@@ -1,3 +1,48 @@
+<?php
+    function upload_file($file)
+    {
+        if ($_FILES[$file]['error'] > 0)
+        {
+            echo 'Error: '.$_FILES[$file]['error'].'<br>';
+        }
+        else
+        {
+            move_uploaded_file($_FILES[$file]['tmp_name'], 'uploaded/'.$_FILES[$file]['name']);
+        }            
+    }
+
+    function arreglo($file)
+    {
+        $archivo = 'uploaded/'.$_FILES[$file]['name'];
+        $fh = fopen($archivo, 'r');
+        $array_code = [];
+        $array_name = [];
+        $i = 0;
+        while(list($code, $names) = fgetcsv($fh, 1024, ',')){
+            $array_code[$i] = $code;
+            $array_name[$i] = $names;
+            $i++;
+        }
+        return [$array_code,$array_name]; 
+    }
+
+    function mostrar($array)
+    {  
+        foreach($array as $cod){
+            print($cod."<br>");
+        }
+    }
+
+    upload_file('archivo1');
+    upload_file('archivo2');
+
+    list($ar1_codigos,$ar1_nombres) = arreglo('archivo1');
+    list($ar2_codigos,$ar2_nombres) = arreglo('archivo2');
+
+    mostrar($ar1_codigos);
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
