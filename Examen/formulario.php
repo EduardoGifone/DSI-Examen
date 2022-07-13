@@ -17,6 +17,22 @@
     list($ar1_codigos,$ar1_nombres) = arreglo('archivo1');
     list($ar2_codigos,$ar2_nombres) = arreglo('archivo2');
 
+    function diferencia_Listas_de_B_peroNoEn_A($Acodes, $Bcodes, $Bnames){
+        $ListaDifCodes = [];
+        $ListaDifNames = [];
+        for($i = 0; $i < count($Bcodes); $i++){
+            if(!in_array($Bcodes[$i],$Acodes)){
+                array_push($ListaDifCodes,$Bcodes[$i]);
+                array_push($ListaDifNames,$Bnames[$i]);
+            }
+        }
+        return [$ListaDifCodes,$ListaDifNames]; 
+    }
+
+    //Obtener listas de alumos necesarias
+    list($codigos_Tutorados_2022I,$nombres_Tutorados_2022I) = diferencia_Listas_de_B_peroNoEn_A($ar1_codigos, $ar2_codigos, $ar2_nombres);
+    list($codigos_nuevos,$nombres_nuevos) = diferencia_Listas_de_B_peroNoEn_A($ar2_codigos, $ar1_codigos, $ar1_nombres);
+    
 ?>
 
 <!DOCTYPE html>
