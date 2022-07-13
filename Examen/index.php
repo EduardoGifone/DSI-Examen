@@ -22,22 +22,22 @@
             <form action="formulario.php" class="form" method="POST" enctype="multipart/form-data">
                 
                 <div class="form__container">
-                    <label for="archivo1" class="form__container__label">Cargar alumnos antiguos</label><br>
+                    <label for="archivo1" class="form__container__label form__container__label--extra">Cargar alumnos antiguos</label><br>
                     <input id="archivo1" type="file" accept=".csv" class="form__container__input" name="archivo1">
                 </div>
                 
                 <div class="form__container">
-                    <label for="archivo2" class="form__container__label">Cargar alumnos matriculados 2022-1</label><br>
+                    <label for="archivo2" class="form__container__label form__container__label--extra">Cargar alumnos matriculados 2022-1</label><br>
                     <input id="archivo2" type="file" accept=".csv" class="form__container__input" name="archivo2">
                 </div>
 
                 <div class="form__container">
 
-                    <label for="mostrar_no_tutorados" class="form__label">
+                    <label for="mostrar_no_tutorados" class="form__container__label">
                         <input id="mostrar_no_tutorados" type="radio" name="mostrar" value="no_tutorados" class="form__radio">
                         Mostrar alumnos que no seran tutorados en 2022-1</label>
                 
-                    <label for="mostrar_nuevos_alumnos" class="form__label">
+                    <label for="mostrar_nuevos_alumnos" class="form__container__label">
                         <input id="mostrar_nuevos_alumnos" type="radio" name="mostrar" value="nuevos_alumnos" class="form__radio">
                         Mostra nuevos alumnos para tutoria</label>
 
