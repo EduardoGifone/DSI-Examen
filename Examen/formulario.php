@@ -1,8 +1,10 @@
 <?php
-    function arreglo($file)
+    function obtenerInformacion($file)
     {
+        //obtener el archivo pedido en index.php
         $archivo = $_FILES[$file]['tmp_name'];
         $fh = fopen($archivo, 'r');
+        //almacenar los codigos y nombres del archivo $file
         $array_code = [];
         $array_name = [];
         $i = 0;
@@ -14,10 +16,13 @@
         return [$array_code,$array_name]; 
     }
 
+    // Obtener los elementos que estan en $Bcodes pero no en $Acodes 
     function diferencia_Listas_de_B_peroNoEn_A($Acodes, $Bcodes, $Bnames){
         $ListaDifCodes = [];
         $ListaDifNames = [];
+        //recorrer a cada elemento de $Bcodes
         for($i = 0; $i < count($Bcodes); $i++){
+            //determinar si el elemento no esta en $Acodes
             if(!in_array($Bcodes[$i],$Acodes)){
                 array_push($ListaDifCodes,$Bcodes[$i]);
                 array_push($ListaDifNames,$Bnames[$i]);
@@ -34,13 +39,13 @@
             }
     }
 
-    // Obtener lista de datos
-    list($ar1_codigos,$ar1_nombres) = arreglo('archivo1');
-    list($ar2_codigos,$ar2_nombres) = arreglo('archivo2');
+    // llamar a la funcion obtenerInformacion para recibir codigos y nombres
+    list($ar1_codigos,$ar1_nombres) = obtenerInformacion('archivo1');
+    list($ar2_codigos,$ar2_nombres) = obtenerInformacion('archivo2');
 
     //Obtener listas de alumos necesarias
-    list($codigos_Tutorados_2022I,$nombres_Tutorados_2022I) = diferencia_Listas_de_B_peroNoEn_A($ar2_codigos, $ar1_codigos, $ar1_nombres);
-    list($codigos_nuevos,$nombres_nuevos) = diferencia_Listas_de_B_peroNoEn_A($ar1_codigos, $ar2_codigos, $ar2_nombres);    
+    list($codigos_noTutorados_2022I,$nombres_noTutorados_2022I) = diferencia_Listas_de_B_peroNoEn_A($ar2_codigos, $ar1_codigos, $ar1_nombres);
+    list($codigos_nuevosAlumnos,$nombres_nuevosAlumnos) = diferencia_Listas_de_B_peroNoEn_A($ar1_codigos, $ar2_codigos, $ar2_nombres);    
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +74,7 @@
 
                 if ($_REQUEST['mostrar'] == 'no_tutorados') 
                 {
-                    echo 'Alumnos que no seran tutorados en 2022-1';
+                    echo 'Alumnos que no seran tutorados en 2022-I';
                 }
                 else 
                 {
@@ -91,11 +96,11 @@
 
                     if ($_REQUEST['mostrar'] == 'no_tutorados') 
                     {
-                        mostrar($codigos_Tutorados_2022I,$nombres_Tutorados_2022I);
+                        mostrar($codigos_noTutorados_2022I,$nombres_noTutorados_2022I);
                     }
                     else 
                     {
-                        mostrar($codigos_nuevos,$nombres_nuevos);
+                        mostrar($codigos_nuevosAlumnos,$nombres_nuevosAlumnos);
                     }                    
                 ?>
                 
