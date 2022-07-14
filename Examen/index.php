@@ -18,16 +18,16 @@
     </nav>
     <main class="main">
         <div class="container">    
-            <h1 class="container__h1">SUBIR EN FORMATO CSV</h1>    
+            <h1 class="container__h1">SUBIR EN FORMATO .CSV</h1>    
             <form action="formulario.php" class="form" method="POST" enctype="multipart/form-data">
                 
                 <div class="form__container">
-                    <label for="archivo1" class="form__container__label form__container__label--extra">Cargar alumnos antiguos</label><br>
+                    <label for="archivo1" class="form__container__label form__container__label--extra">Cargar alumnos del semestre 2021-II</label><br>
                     <input id="archivo1" type="file" accept=".csv" class="form__container__input" name="archivo1">
                 </div>
                 
                 <div class="form__container">
-                    <label for="archivo2" class="form__container__label form__container__label--extra">Cargar alumnos matriculados 2022-1</label><br>
+                    <label for="archivo2" class="form__container__label form__container__label--extra">Cargar alumnos matriculados 2022-I</label><br>
                     <input id="archivo2" type="file" accept=".csv" class="form__container__input" name="archivo2">
                 </div>
 
@@ -35,11 +35,11 @@
 
                     <label for="mostrar_no_tutorados" class="form__container__label">
                         <input id="mostrar_no_tutorados" type="radio" name="mostrar" value="no_tutorados" class="form__radio">
-                        Mostrar alumnos que no seran tutorados en 2022-1</label>
+                        Mostrar alumnos que no seran tutorados en 2022-I</label>
                 
                     <label for="mostrar_nuevos_alumnos" class="form__container__label">
                         <input id="mostrar_nuevos_alumnos" type="radio" name="mostrar" value="nuevos_alumnos" class="form__radio">
-                        Mostra nuevos alumnos para tutoria</label>
+                        Mostrar nuevos alumnos para tutoria</label>
 
                 </div>
 

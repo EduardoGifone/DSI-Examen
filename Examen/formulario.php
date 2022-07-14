@@ -69,7 +69,7 @@
 
                 if ($_REQUEST['mostrar'] == 'no_tutorados') 
                 {
-                    echo 'Alumnos que no seran tutorados en 2022-1';
+                    echo 'Alumnos que no seran tutorados en 2022-I';
                 }
                 else 
                 {
