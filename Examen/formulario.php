@@ -1,51 +1,65 @@
 <?php
+    // CLASE: Alumno
+    class alumno {
+        public $codigo;
+        public $nombre;
+
+        public function __construct($codigo, $nombre){
+            $this->codigo = $codigo;
+            $this->nombre = $nombre;
+        }
+    }
+
     function obtenerInformacion($file)
     {
         //obtener el archivo pedido en index.php
         $archivo = $_FILES[$file]['tmp_name'];
         $fh = fopen($archivo, 'r');
         //almacenar los codigos y nombres del archivo $file
-        $array_code = [];
-        $array_name = [];
+        $array_alumnos = [];
         $i = 0;
         while(list($code, $names) = fgetcsv($fh, 1024, ',')){
-            $array_code[$i] = $code;
-            $array_name[$i] = $names;
+            $array_alumnos[$i] = new alumno($code,$names);
             $i++;
         }
-        return [$array_code,$array_name]; 
+        return $array_alumnos; 
     }
 
     // Obtener los elementos que estan en $Bcodes pero no en $Acodes 
-    function diferencia_Listas_de_B_peroNoEn_A($Acodes, $Bcodes, $Bnames){
-        $ListaDifCodes = [];
-        $ListaDifNames = [];
+    function diferencia_Listas_de_B_peroNoEn_A($Aalumnos, $Balumnos){
+        $ListaDif = [];
         //recorrer a cada elemento de $Bcodes
-        for($i = 0; $i < count($Bcodes); $i++){
+        for($i = 0; $i < count($Balumnos); $i++){
             //determinar si el elemento no esta en $Acodes
-            if(!in_array($Bcodes[$i],$Acodes)){
-                array_push($ListaDifCodes,$Bcodes[$i]);
-                array_push($ListaDifNames,$Bnames[$i]);
+            $flag = false;
+            for($j = 0; $j < count($Aalumnos); $j++){
+                if ($Balumnos[$i]->codigo == $Aalumnos[$j]->codigo)
+                {
+                    $flag = true;
+                }
+            }
+            if (!$flag){
+                array_push($ListaDif,$Balumnos[$i]);
             }
         }
-        return [$ListaDifCodes,$ListaDifNames]; 
+        return $ListaDif; 
     }
 
-    function mostrar($cod, $name) {
-        for ($i = 0; $i < count($cod); $i++)
+    function mostrar($alumno) {
+        for ($i = 0; $i < count($alumno); $i++)
             {
-                echo '<p class="tabla_datos__row__p">'.$cod[$i].'</p>';
-                echo '<p class="tabla_datos__row__p">'.$name[$i].'</p>';
+                echo '<p class="tabla_datos__row__p">'.$alumno[$i]->codigo.'</p>';
+                echo '<p class="tabla_datos__row__p">'.$alumno[$i]->nombre.'</p>';
             }
     }
 
     // llamar a la funcion obtenerInformacion para recibir codigos y nombres
-    list($ar1_codigos,$ar1_nombres) = obtenerInformacion('archivo1');
-    list($ar2_codigos,$ar2_nombres) = obtenerInformacion('archivo2');
+    $ar1_alumnos = obtenerInformacion('archivo1');
+    $ar2_alumnos = obtenerInformacion('archivo2');
 
     //Obtener listas de alumos necesarias
-    list($codigos_noTutorados_2022I,$nombres_noTutorados_2022I) = diferencia_Listas_de_B_peroNoEn_A($ar2_codigos, $ar1_codigos, $ar1_nombres);
-    list($codigos_nuevosAlumnos,$nombres_nuevosAlumnos) = diferencia_Listas_de_B_peroNoEn_A($ar1_codigos, $ar2_codigos, $ar2_nombres);    
+    $alumnos_noTutorados_2022I = diferencia_Listas_de_B_peroNoEn_A($ar2_alumnos, $ar1_alumnos);
+    $alumnos_nuevos = diferencia_Listas_de_B_peroNoEn_A($ar1_alumnos, $ar2_alumnos);
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +85,6 @@
         <div class="titulo">
             <h1 class="titulo__h1">
             <?php
-
                 if ($_REQUEST['mostrar'] == 'no_tutorados') 
                 {
                     echo 'Alumnos que no seran tutorados en 2022-I';
@@ -96,11 +109,11 @@
 
                     if ($_REQUEST['mostrar'] == 'no_tutorados') 
                     {
-                        mostrar($codigos_noTutorados_2022I,$nombres_noTutorados_2022I);
+                        mostrar($alumnos_noTutorados_2022I);
                     }
                     else 
                     {
-                        mostrar($codigos_nuevosAlumnos,$nombres_nuevosAlumnos);
+                        mostrar($alumnos_nuevos);
                     }                    
                 ?>
                 
