@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 10px;
+    gap: .625rem;
 }
 
 .nav__img--unsaac {
@@ -43,56 +44,80 @@ body {
     align-items: center;
 }
 
+.nav__text__h1 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
 .container {
     max-width: 1200px;
-    margin: 50px auto;
+    margin: 3.125rem auto;
 }
 
 .titulo {
     background-color: #0F1432;
     border-radius: 8px;
     box-shadow: 15px 15px 25px rgba(0,0,0,0.4);
-    padding: 20px;
-    margin: 50px auto;
+    padding: 1.25rem;
+    margin: 3.125rem auto;
     text-align: center;
+}
+
+.titulo__h1{
+    font-size: 1.875rem;
 }
 
 .tabla_datos {
     background-color: #0F1432;
     border-radius: 8px;
     box-shadow: 15px 15px 25px rgba(0,0,0,0.4);
-    padding: 30px;
+    padding: 1.875rem;
+    padding-top: .625rem;
 }
 
-.tabla_datos__row {
+.tabla__head__p {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+    background-color: #F09A3B;
+    padding: .9375rem .625rem;
+    border-radius: .3125rem;
+    margin-bottom: .625rem;
+    margin-top: .9375rem;
+    text-shadow: 4px 4px 5px rgba(0,0,0,1);
+}
+
+.tabla__body {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-weight: 400;
+    gap: .625rem;
 }
 
-.tabla_datos__row__p {
-    padding: 10px;
-    border-radius: 5px;
-    margin: 3px;
-}
-
-.tabla_datos__row--head .tabla_datos__row__p {
-    background-color: #fff;
-    color: #000;
-    font-weight: 900;
-}
-
-.tabla_datos__row--body .tabla_datos__row__p {
+.tabla__body__p{
     background-color: #292F4F;
     color: #fff;
+    border-radius: 5px;
+    padding: .3125rem .9375rem;
 }
 
-.tabla_datos__row--body .tabla_datos__row__p:nth-child(4n){
+.tabla__body__p:nth-child(4n){
     background-color: #fff;
     color: #000;
 }
 
-.tabla_datos__row--body .tabla_datos__row__p:nth-child(4n-1){
+.tabla__body__p:nth-child(4n-1){
     background-color: #fff;
     color: #000;
+}
+
+@media (max-width: 700px) {
+    * {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 500px) {
+    * {
+        font-size: 13px;
+    }
 }

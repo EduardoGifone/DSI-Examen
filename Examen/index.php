@@ -23,17 +23,23 @@
                 
                 <div class="form__container">
 
-                    <label for="archivo1" class="form__container__label">Cargar alumnos antiguos</label><br>
+                    <label for="archivo1" class="form__container__label">Cargar Distribución Docente de Tutorias en 2021-2</label><br>
                     <input id="archivo1" type="file" accept=".csv" class="form__container__input" name="archivo1" required>
                 </div>
                 
                 <div class="form__container">
-                    <label for="archivo2" class="form__container__label">Cargar alumnos matriculados 2022-1</label><br>
+                    <label for="archivo2" class="form__container__label">Cargar Alumnos 2022-1</label><br>
                     <input id="archivo2" type="file" accept=".csv" class="form__container__input" name="archivo2" required>
 
                 </div>
 
                 <div class="form__container">
+                    <label for="archivo3" class="form__container__label">Cargar Docentes 2022-1</label><br>
+                    <input id="archivo3" type="file" accept=".csv" class="form__container__input" name="archivo3" required>
+
+                </div>
+
+                <!-- <div class="form__container">
 
 
                     <label for="mostrar_no_tutorados" class="form__label">
@@ -45,7 +51,7 @@
                         <input id="mostrar_nuevos_alumnos" type="radio" name="mostrar" value="nuevos_alumnos" class="form__radio">
                         Mostrar nuevos alumnos para tutoria</label>
 
-                </div>
+                </div> -->
 
                 <input type="submit" class="form__submit" value="►  Enviar">
 
