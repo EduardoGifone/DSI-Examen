@@ -82,7 +82,7 @@
         $i = 1;
         while(list($number, $code, $names) = fgetcsv($fh, 1024, ',')){
             if ($i > 1) {
-                $alumno = new alumno($code,$names);
+                $alumno = new alumno($code,utf8_encode($names));
                 array_push($array_alumnos,$alumno);
             }            
             $i++;
@@ -100,7 +100,7 @@
         $i = 1;
         while(list($number, $names, $category) = fgetcsv($fh, 1024, ',')){
             if ($i > 1) {
-                array_push($array_docentes,$names);
+                array_push($array_docentes,utf8_encode($names));
             }            
             $i++;
         }
@@ -263,7 +263,7 @@
                 else {  
                     echo '<p class="tabla__body__p">'.$tutorias[$i]->alumnos[$j]->codigo.'</p>';
                     echo '<p class="tabla__body__p">'.$tutorias[$i]->alumnos[$j]->nombre.'</p>';
-                }                
+                }              
             }
             echo '</div>';
             echo '</div>';
@@ -303,7 +303,7 @@
         }
         return $rpta;
     }
-
+    
     function aniadirAlumnos( &$alumnosTutoria, &$lstAlumnos, $faltan){
         for($i = 0; $i < $faltan; $i++){
             array_push($alumnosTutoria, $lstAlumnos[0]);
@@ -313,14 +313,10 @@
         }
     }
 
-
-
     function agregarAleatoriamente($alumnos, $tutorados, $limite){
         //Iniciar variable de añadidos
         $agregados = 0;
-        //Iniciar índice de alumno a agregar
-        $indexAlumno = 0;
-        //Recorrer tutorados
+        //Recorrer alumnos
         for($indexAlumno = 0; $indexAlumno < count($alumnos); $indexAlumno++){
             //Iniciar bandera de si el alumno fue agregado
             $agregado = false;
@@ -341,13 +337,106 @@
         if($agregados < count($alumnos)){
             for($ast = $agregados; $ast < count($alumnos); $ast++){
                 //Generar índice aleatorio
-                $index = rand(0, count($tutorados));
+                $index = rand(0, count($tutorados) - 1);
                 array_push($tutorados[$index]->alumnos, $alumnos[$ast]);
             }
         }
     }
 
+    //Función para asignar totores a los alumnos sin tutoría
+    function agregarAlumnosFaltantesAtutoria($lista_alumnos_asignar, $tutorias, $limiteAlumnosPorTutoria){
+        //Obtener cantidad de tutorías
+        $nroTutorias = count($tutorias);
+        #----------------------------------------------------------------------------#
+        // //Recorrer arreglo de alumnos faltantes
+        foreach($lista_alumnos_asignar as $codigoAlumno => $alumnosDeCodigo) {
+            // $codigoAlumno: Primeros dos dígitos del código de alumnos;
+            // $alumnosDeCodigo: Arreglo de objetos alumno que poseen las mismas iniciales de código
+            //Obtener la cantidad de alumnos del código actual
+            $cantidadAlumnosCodigo = count($alumnosDeCodigo);
+            //Calcular cantidad de alumnos para cada tutoría
+            $nroAlumnosPorTutor = intdiv($cantidadAlumnosCodigo, $nroTutorias);
+            //Evaluar si al menos existe un alumno para cada tutor
+            if ($nroAlumnosPorTutor < 1){
+                //Asignar alumnos aleatoriamente
+                agregarAleatoriamente($alumnosDeCodigo, $tutorias, $limiteAlumnosPorTutoria);
+            }
+            else{
+                //Recorrer lista de tutorados
+                for($indexTutor = 0; $indexTutor < count($tutorias); $indexTutor++){
+                    //Obtener la cantidad de alumnos que tienen el código actual
+                    $nroAlumnosDeCodigoTutorado = $tutorias[$indexTutor]->CantidadDeAlumnos($codigoAlumno);
+                    //Verificar si le faltan alumnos
+                    if ($nroAlumnosDeCodigoTutorado < $nroAlumnosPorTutor){
+                        //Calcular cuántos alumnos faltan
+                        $faltan = $nroAlumnosPorTutor - $nroAlumnosDeCodigoTutorado;
+                        //Asignar alumnos
+                        aniadirAlumnos($tutorias[$indexTutor]->alumnos, $alumnosDeCodigo, $faltan);
+                    }
+                }
+                //Verificar que no queden alumnos por asignar
+                if (count($alumnosDeCodigo) > 0){
+                    //Asignar aleatoriamente 
+                    agregarAleatoriamente($alumnosDeCodigo, $tutorias, $limiteAlumnosPorTutoria);
+                }
+            }
+        } 
+    }
 
+    function OrdenamientoResultados(&$tutorias){
+        foreach($tutorias as $tutoria){
+            $longitud = count($tutoria->alumnos);
+            for ($i = 0; $i < $longitud; $i++) {
+                for ($j = 0; $j < $longitud - 1; $j++) {
+                    if ($tutoria->alumnos[$j]->codigo > $tutoria->alumnos[$j + 1]->codigo) {
+                        $temporal = $tutoria->alumnos[$j]->codigo;
+                        $tutoria->alumnos[$j]->codigo = $tutoria->alumnos[$j + 1]->codigo;
+                        $tutoria->alumnos[$j + 1]->codigo = $temporal;
+                    }
+                }
+            }
+        }
+    }
+
+    //Función para escribir un csv con los datos de los tutorados
+    function writeCsvTutorados2022($ruta, $tutorados){
+        //Abrir archivo csv
+        $archivo = fopen($ruta, "w");
+        //-------------------------------------------------Agregar contenido-------------------------------------------------
+        //Iniciar variables
+        $numeroDocente = 1;
+        fputs($archivo, "Distribución Docentes de tutoría en 2022-I,"); 
+        //Recorrer tutorados
+        for($indexTutor = 0; $indexTutor < count($tutorados); $indexTutor++){
+            //Agregar docente de tutorado
+            fputs($archivo, "\nDocente #".$numeroDocente.",".$tutorados[$indexTutor]->docente); 
+            if($indexTutor == 0){
+                fputs($archivo, "\n".'CÓDIGO'.",Nombres"); 
+            }
+            //Agregar alumnos
+            $listaAlumnos = $tutorados[$indexTutor]->alumnos;
+            for($indexAlumno = 0; $indexAlumno < count($listaAlumnos); $indexAlumno++){
+                //Obtener lista de alumno
+                fputs($archivo, "\n".$listaAlumnos[$indexAlumno]->codigo.",".$listaAlumnos[$indexAlumno]->nombre);
+            }
+            $numeroDocente++;
+        }
+    }
+
+    //Función crear csv con alumnos no considerados para tutoría
+    function writeCsvAlumnosNoConsiderados($ruta, $alumnos){
+        //Abrir archivo csv
+        $archivo = fopen($ruta, "w");
+        //Iniciar variable
+        $nroAlumno = 1; 
+        //-------------------------------------------------Agregar contenido-------------------------------------------------
+        fputs($archivo, "Alumnos no considerados para tutoría en 2022-I,"); 
+        fputs($archivo, "\n#,Código,Nombres");
+        //Recorrer alumnos
+        for($indexAlumno = 0; $indexAlumno < count($alumnos); $indexAlumno++){
+            fputs($archivo, "\n".$nroAlumno.",".$alumnos[$indexAlumno]->codigo.",".$alumnos[$indexAlumno]->nombre);
+        } 
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -364,45 +453,14 @@
     //Obtener cantidad de alumnos por tutoría
     $limiteAlumnosPorTutoria = intdiv(count($alumnos_2022_1), count($tutorias));
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Algoritmo para añadir alumnos faltantes a tutoría
-    //Obtener cantidad de tutorías
-    $nroTutorias = count($tutorias);
-    #----------------------------------------------------------------------------#
-    // //Recorrer arreglo de alumnos faltantes
-    foreach($lista_alumnos_asignar as $codigoAlumno => $alumnosDeCodigo) {
-        // $codigoAlumno: Primeros dos dígitos del código de alumnos;
-        // $alumnosDeCodigo: Arreglo de objetos alumno que poseen las mismas iniciales de código
-        //Obtener la cantidad de alumnos del código actual
-        $cantidadAlumnosCodigo = count($alumnosDeCodigo);
-        //Calcular cantidad de alumnos para cada tutoría
-        $nroAlumnosPorTutor = intdiv($cantidadAlumnosCodigo, $nroTutorias);
-        //Evaluar si al menos existe un alumno para cada tutor
-        if ($nroAlumnosPorTutor < 1){
-            //Asignar alumnos aleatoriamente
-            agregarAleatoriamente($alumnosDeCodigo, $tutorias, $limiteAlumnosPorTutoria);
-        }
-        else{
-            //Recorrer lista de tutorados
-            for($indexTutor = 0; $indexTutor < count($tutorias); $indexTutor++){
-                //Obtener la cantidad de alumnos que tienen el código actual
-                $nroAlumnosDeCodigoTutorado = $tutorias[$indexTutor]->CantidadDeAlumnos($codigoAlumno);
-                //Verificar si le faltan alumnos
-                if ($nroAlumnosDeCodigoTutorado < $nroAlumnosPorTutor){
-                    //Calcular cuántos alumnos faltan
-                    $faltan = $nroAlumnosPorTutor - $nroAlumnosDeCodigoTutorado;
-                    //Asignar alumnos
-                    aniadirAlumnos($tutorias[$indexTutor]->alumnos, $alumnosDeCodigo, $faltan);
-                }
-            }
-            //Verificar que no queden alumnos por asignar
-            if (count($alumnosDeCodigo) > 0){
-                //Asignar aleatoriamente 
-                agregarAleatoriamente($alumnosDeCodigo, $tutorias, $limiteAlumnosPorTutoria);
-            }
-        }
-    } 
-
-    
+    //Agregar alumnos faltantes a tutoría
+    agregarAlumnosFaltantesAtutoria($lista_alumnos_asignar, $tutorias, $limiteAlumnosPorTutoria); 
+    //Ordenar alumnos de tutorados según código
+    OrdenamientoResultados($tutorias);
+    //Crear archivo CSV con los tutorados para el 2022-I
+    writeCsvTutorados2022("../Resultados/alumnosTutorados2022-I.csv", $tutorias);
+    //Crear archivo CSV con alumnos no tutorados en el 2022-I
+    writeCsvAlumnosNoConsiderados("../Resultados/alumnosNoTutorados.csv", $alumnos_no_tutoria);
 ?>
 
 <!DOCTYPE html>
