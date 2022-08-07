@@ -2,7 +2,22 @@
 
 ## Descripcion
 
-Para este proyecto se nos dispondra de dos archivos en formato ***csv***, donde tendremos la informacion de ***alumnos matriculados en el semestre 2021-II*** y los ***nuevos alumnos matriculados en el semestre 2022-I***, nuestro proposito es mostrar a los alumnos que no serán tutorados en 2022-I y mostrar nuevos alumnos que requieren tutoría.
+Para este proyecto se nos pidio desarrollar la funcionalidad que permita realizar la distribución balanceada de los estudiantes a los tutores para el presente semestre 2022-1.
+
+## Datos de entrada
+* Archivo CVS Lista de alumnos matriculados en el presente semestre.
+* Archivo CVS Lista de docentes para el presente semestre.
+* Archivo CVS Distribución de tutorías del anterior semestre.
+
+## Resultados
+* Archivo CSV Lista de alumnos ya no son considerados en la tutoría (Alumnos no matriculados en el presente semestre).
+* Archivo CSV Distribución balanceada de tutorías para el presente semestre.
+
+## Restricciones
+* Distribución balanceada: Distribución equitativa de estudiantes a tutores y Que el docente tenga alumnos de diferentes códigos.
+* Implementación de una interface para el usuario sencilla, intuitiva y práctica.
+* Mantener la lista de tutorías del anterior semestre con el docente asignado.
+
 
 ## Funcionamiento
 
@@ -11,18 +26,18 @@ Para este proyecto se nos dispondra de dos archivos en formato ***csv***, donde 
 ![Subida de archivos csv](/screenshot/1.png)
 
 Lo primero que tenemos que hacer, es subir los datos en formato csv.
-* Tutorados_2021-II
-* Matriculados_2022-I
+* Distribucion x Docente 2021-2.csv
+* Alumnos 2022-1.csv
+* Docentes 2022-I.csv
 
-Una vez subidos los archivos csv seran capturados en el programa y llevar toda esa información a arreglos, los cuales contendrán por separado los códigos y los nombres de los alumnos.
-
-Tambien tenemos que selecionar la opcion que deseamos realizar.
-
-![Marcado de opcion](/screenshot/3.png)
+Una vez subidos los archivos csv seran capturados en el programa y se llevaran a una estructura de objetos.
 
 ### Mostrar datos
 
-Una vez subido los datos y marcada la opcion deseada, se mostrara los datos deseados.
+Una vez enviados los archivos, se mostrara la Distribucion de alumnos x Docente.
+De igual manera se podran descargar los archivos:
+* AlumnosNoTutorados.csv
+* DistribucionTutorados2022-I.csv
 
 ![Marcado de opcion](/screenshot/2.png)
 
