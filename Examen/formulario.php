@@ -313,12 +313,37 @@
         }
     }
 
-    function agregarAleatoriamente($alumnos, $tutorados){
-        for($i = 0; $i < count($alumnos); $i++){
-            //Obtener aleatorio
-            $index = rand(0, count($tutorados) - 1);
-            //Agregar alumno 
-            array_push($tutorados[$index]->alumnos, $alumnos[$i]);
+
+
+    function agregarAleatoriamente($alumnos, $tutorados, $limite){
+        //Iniciar variable de añadidos
+        $agregados = 0;
+        //Iniciar índice de alumno a agregar
+        $indexAlumno = 0;
+        //Recorrer tutorados
+        for($indexAlumno = 0; $indexAlumno < count($alumnos); $indexAlumno++){
+            //Iniciar bandera de si el alumno fue agregado
+            $agregado = false;
+            //Iniciar índice de tutor
+            $indexTutor = 0;
+            while ($indexTutor < count($tutorados) && !$agregado){
+                //Verificar si la cantidad de alumnos del tutor actual no pasa del límite
+                if ($tutorados[$indexTutor]->nro_alumnos() < $limite){
+                    //Agregar alumno
+                    array_push($tutorados[$indexTutor]->alumnos,$alumnos[$indexAlumno]);
+                    $agregado = true;
+                    $agregados++;                
+                }
+                $indexTutor++;
+            }      
+        }
+        //Verificar que todos fueron agregados
+        if($agregados < count($alumnos)){
+            for($ast = $agregados; $ast < count($alumnos); $ast++){
+                //Generar índice aleatorio
+                $index = rand(0, count($tutorados));
+                array_push($tutorados[$index]->alumnos, $alumnos[$ast]);
+            }
         }
     }
 
@@ -336,7 +361,8 @@
     actualizarCodigosa6Digitos($alumnos_antiguos);
     $codigos = obtenerPrefijosCodigos(obtenerSoloCodigos($alumnos_2022_1));
     $lista_alumnos_asignar = crear_lista_alumnos_asignar($alumnos_disponibles, $codigos);
-
+    //Obtener cantidad de alumnos por tutoría
+    $limiteAlumnosPorTutoria = intdiv(count($alumnos_2022_1), count($tutorias));
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Algoritmo para añadir alumnos faltantes a tutoría
     //Obtener cantidad de tutorías
@@ -353,7 +379,7 @@
         //Evaluar si al menos existe un alumno para cada tutor
         if ($nroAlumnosPorTutor < 1){
             //Asignar alumnos aleatoriamente
-            agregarAleatoriamente($alumnosDeCodigo, $tutorias);
+            agregarAleatoriamente($alumnosDeCodigo, $tutorias, $limiteAlumnosPorTutoria);
         }
         else{
             //Recorrer lista de tutorados
@@ -371,7 +397,7 @@
             //Verificar que no queden alumnos por asignar
             if (count($alumnosDeCodigo) > 0){
                 //Asignar aleatoriamente 
-                agregarAleatoriamente($alumnosDeCodigo, $tutorias);
+                agregarAleatoriamente($alumnosDeCodigo, $tutorias, $limiteAlumnosPorTutoria);
             }
         }
     } 
