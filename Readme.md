@@ -1,5 +1,13 @@
 # Proyecto Desarrollo de Software
 
+## Integrantes
+
+* Cconcho Castellanos Miguel Angel&ensp;&ensp;&ensp;&ensp;***192999***
+* Chirinos Vilca Yerson Joab&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;***182731***
+* Gifone Villasante Eduardo Juareis&ensp;&ensp;&ensp;&ensp;***193001***
+* Maccarcco Quispe Karol Gianella&ensp;&ensp;&ensp;&nbsp;&ensp;***192424***
+* Puma Huamani Glina de la Flor&ensp;&ensp;&ensp;&nbsp;&ensp;&ensp;&ensp;***191873***
+
 ## Descripcion
 
 Para este proyecto se nos pidio desarrollar la funcionalidad que permita realizar la distribución balanceada de los estudiantes a los tutores para el presente semestre 2022-1.
@@ -23,7 +31,7 @@ Para este proyecto se nos pidio desarrollar la funcionalidad que permita realiza
 
 ### Cargar datos
 
-![Subida de archivos csv](/screenshot/1.png)
+![Subida de archivos csv](/screenshot/ss-1.png)
 
 Lo primero que tenemos que hacer, es subir los datos en formato csv.
 * Distribucion x Docente 2021-2.csv
@@ -39,5 +47,5 @@ De igual manera se podran descargar los archivos:
 * AlumnosNoTutorados.csv
 * DistribucionTutorados2022-I.csv
 
-![Marcado de opcion](/screenshot/2.png)
+![Marcado de opcion](/screenshot/ss-2.png)
 
