@@ -67,6 +67,41 @@ body {
     font-size: 1.875rem;
 }
 
+.titulo__h1--extra {
+    display: inline-block;
+    font-size: 1.25rem;
+}
+
+.titulo__cont{
+    margin: 20px;
+}
+
+.titulo__cuadradito {
+    margin: 0 10px;
+    font-size: 1.25rem;
+    background-color: #b58654;
+    height: 10px;
+    width: 40px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.titulo__a{
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #E6EEEA;
+    display: inline-block;
+    margin: 8px;
+    transition: all 500ms ease;
+}
+
+.titulo__a:hover{
+    transform: scale(1.05);
+}
+
 .tabla_datos {
     background-color: #0F1432;
     border-radius: 8px;
@@ -103,12 +138,11 @@ body {
 
 .tabla__body__p--nuevo{
     background-color: #b58654;
-    color: #000;
+    color: #fff;
     border-radius: 5px;
     padding: .3125rem .9375rem;
     font-weight: 700;
 }
-
 
 @media (max-width: 700px) {
     * {

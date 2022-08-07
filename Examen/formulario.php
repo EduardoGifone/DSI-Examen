@@ -252,7 +252,7 @@
         for ($i = 0; $i < count($tutorias); $i++){
             echo '<div class="tabla">';
             echo '<div class="tabla__head">';
-            echo '<p class="tabla__head__p">'.$tutorias[$i]->docente.'N° Alumnos: '.$tutorias[$i]->nro_alumnos().'</p>';
+            echo '<p class="tabla__head__p">'.$tutorias[$i]->docente.' - N° Alumnos: '.$tutorias[$i]->nro_alumnos().'</p>';
             echo '</div>';
             echo '<div class="tabla__body">';
             for ($j = 0; $j < count($tutorias[$i]->alumnos);$j++){
@@ -434,7 +434,7 @@
         fputs($archivo, "\n#,Código,Nombres");
         //Recorrer alumnos
         for($indexAlumno = 0; $indexAlumno < count($alumnos); $indexAlumno++){
-            fputs($archivo, "\n".$nroAlumno.",".$alumnos[$indexAlumno]->codigo.",".$alumnos[$indexAlumno]->nombre);
+            fputs($archivo, "\n".($indexAlumno+1).",".$alumnos[$indexAlumno]->codigo.",".$alumnos[$indexAlumno]->nombre);
         } 
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -458,9 +458,9 @@
     //Ordenar alumnos de tutorados según código
     OrdenamientoResultados($tutorias);
     //Crear archivo CSV con los tutorados para el 2022-I
-    writeCsvTutorados2022("../Resultados/alumnosTutorados2022-I.csv", $tutorias);
+    writeCsvTutorados2022("../Resultados/DistribucionTutorados2022-I.csv", $tutorias);
     //Crear archivo CSV con alumnos no tutorados en el 2022-I
-    writeCsvAlumnosNoConsiderados("../Resultados/alumnosNoTutorados.csv", $alumnos_no_tutoria);
+    writeCsvAlumnosNoConsiderados("../Resultados/AlumnosNoTutorados.csv", $alumnos_no_tutoria);
 ?>
 
 <!DOCTYPE html>
@@ -485,6 +485,12 @@
 
         <div class="titulo">
             <h1 class="titulo__h1">Distribucion de tutorias semestre 2022-1</h1>
+            <div class="titulo__cont">
+                <h1 class="titulo__h1 titulo__h1--extra">Color de nuevo tutorado</h1>
+                <div class="titulo__cuadradito"></div>
+            </div>
+            <a class="titulo__a" href=../Resultados/AlumnosNoTutorados.csv>Descargar archivo csv de Alumnos no tutorados</a>
+            <a class="titulo__a" href=../Resultados/DistribucionTutorados2022-I.csv>Descargar archivo csv de Distribucion de tutorias</a>
         </div>
 
         <div class="tabla_datos"> 
