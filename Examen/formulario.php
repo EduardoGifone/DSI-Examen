@@ -141,11 +141,11 @@
                 else {
                     if ($code != '') {
                         if (buscar($code,$alumnosMatriculados)) {
-                            $alumno = new alumno($code,$names);
+                            $alumno = new alumno($code,utf8_encode($names));
                             array_push($alumnos,$alumno);
                         }
                         else {
-                            $alumno = new alumno($code,$names);
+                            $alumno = new alumno($code,utf8_encode($names));
                             array_push($alumnos_no_tutoria,$alumno);                            
                         }                        
                     }                
