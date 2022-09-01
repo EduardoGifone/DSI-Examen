@@ -208,13 +208,15 @@
             echo '</div>';
             echo '<div class="tabla__body">';
             for ($j = 0; $j < count($tutorias[$i]->alumnos);$j++){
+                $codigoAlmno = $tutorias[$i]->alumnos[$j]->codigo;
+                $nombreAlmno = $tutorias[$i]->alumnos[$j]->nombre;
                 if ($tutorias[$i]->alumnos[$j]->tieneTutoria == true){
-                    echo '<p class="tabla__body__p--nuevo">'.$tutorias[$i]->alumnos[$j]->codigo.'</p>';
-                    echo '<p class="tabla__body__p--nuevo">'.$tutorias[$i]->alumnos[$j]->nombre.'</p>';
+                    echo '<p class="tabla__body__p--nuevo">'.$codigoAlmno.'</p>';
+                    echo '<p class="tabla__body__p--nuevo">'.utf8_decode($nombreAlmno).'</p>';
                 }
                 else {  
-                    echo '<p class="tabla__body__p">'.$tutorias[$i]->alumnos[$j]->codigo.'</p>';
-                    echo '<p class="tabla__body__p">'.$tutorias[$i]->alumnos[$j]->nombre.'</p>';
+                    echo '<p class="tabla__body__p">'.$codigoAlmno.'</p>';
+                    echo '<p class="tabla__body__p">'.utf8_decode($nombreAlmno).'</p>';
                 }              
             }
             echo '</div>';
