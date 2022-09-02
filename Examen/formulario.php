@@ -1,7 +1,6 @@
 <?php
     // ====================================== VARIABLES GLOBALES ======================================
     $alumnos_no_tutoria = array();
-    // cambiar nombre $alumnos_tutorados_2021-II
     $alumnos_antiguos = array();
     $alumnos_disponibles = array(); //alumnos nuevos
 
@@ -69,8 +68,8 @@
         return $array_alumnos; 
     }
 
-    // Obtener arreglo de docentes 2022_1
-    function obtenerDocentes_2022_1($file){
+    // Obtener arreglo de docentes del semestre actual
+    function obtenerDocentesSemestreActual($file){
         $gestor = leerArchivo($file);
         //almacenar los codigos y nombres del archivo $file
         $array_docentes = [];
@@ -103,7 +102,7 @@
         return $alumnos_nuevos;
     }
 
-    // Buscar alumno en alumnos 2022-1
+    // Buscar alumno en alumnos del semestre actual
     function buscar($codigoAlumno, $alumnosMatriculados) {
         for ($i = 0; $i < count($alumnosMatriculados); $i++) {
             if ($codigoAlumno == $alumnosMatriculados[$i]->codigo) {
@@ -292,7 +291,7 @@
 
     //Función para asignar tutores a los alumnos sin tutoría
     function agregarAlumnosFaltantesAtutoria(){
-        // Obtener alumnos matriculados en el semestre 2022_1
+        // Obtener alumnos matriculados en el semestre actual
         $alumnosMatriculados = actualizarCodigosa6Digitos(ObtenerAlumnosMatriculados('alumnosMatriculados'));
         // Obtener lista de objetos tutoria
         $tutorias = ObtenerArregloTutorias('distribucionDocente', $alumnosMatriculados);
@@ -359,7 +358,7 @@
     }
 
     //Función para escribir un csv con los datos de los tutorados
-    function writeCsvTutorados2022($ruta, $tutorados){
+    function writeCsvTutoradosSemestreActual($ruta, $tutorados){
         //Abrir archivo csv
         $archivo = fopen($ruta, "w");
         //-------------------------------------------------Agregar contenido-------------------------------------------------
@@ -390,7 +389,7 @@
         //Iniciar variable
         $nroAlumno = 1; 
         //-------------------------------------------------Agregar contenido-------------------------------------------------
-        fputs($archivo, "Alumnos no considerados para tutoría en 2022-I,"); 
+        fputs($archivo, "Alumnos no considerados para tutoría en el semestre actual,"); 
         fputs($archivo, "\n#,Código,Nombres");
         //Recorrer alumnos
         for($indexAlumno = 0; $indexAlumno < count($alumnos); $indexAlumno++){
@@ -402,9 +401,9 @@
     
     //Agregar alumnos faltantes a tutoría
     $tutorias = agregarAlumnosFaltantesAtutoria(); 
-    //Crear archivo CSV con los tutorados para el 2022-I
-    writeCsvTutorados2022("../Resultados/DistribucionTutorados2022-I.csv", $tutorias);
-    //Crear archivo CSV con alumnos no tutorados en el 2022-I
+    //Crear archivo CSV con los tutorados para el semestre actual
+    writeCsvTutoradosSemestreActual("../Resultados/DistribucionTutorados2022-I.csv", $tutorias);
+    //Crear archivo CSV con alumnos no tutorados en el semestre actual
     writeCsvAlumnosNoConsiderados("../Resultados/AlumnosNoTutorados.csv", $alumnos_no_tutoria);
 ?>
 
